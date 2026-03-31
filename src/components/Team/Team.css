@@ -1,0 +1,287 @@
+.team-section {
+  padding: 60px 0 100px;
+  position: relative;
+  z-index: 10;
+}
+
+.team__header {
+  margin-bottom: 60px;
+}
+
+/* ===== Senior Board ===== */
+.team__senior-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.team__senior-card {
+  padding: 24px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team__senior-card:hover {
+  transform: translateY(-8px);
+}
+
+.team__senior-img-wrapper {
+  width: 100%;
+  aspect-ratio: 4/5; /* Large portrait style */
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.05); /* Skeleton placeholder */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team__senior-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.team__senior-card:hover .team__senior-img {
+  transform: scale(1.05);
+}
+
+.team__senior-info {
+  text-align: center;
+}
+
+.team__senior-role {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.team__senior-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+/* Senior Board Contact Icons */
+.team__senior-contacts {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.team__contact-link {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 180, 216, 0.1);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 180, 216, 0.2);
+  position: relative;
+}
+
+.team__contact-link:hover {
+  background: var(--accent-cyan);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Tooltip for contacts styling */
+.tooltip .tooltip-text {
+  visibility: hidden;
+  min-width: 130px;
+  background-color: var(--bg-card);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 20;
+  bottom: 125%; 
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--glass-border) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== Junior Board ===== */
+.team__junior-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.team__junior-row {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.team__junior-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Left Side Department Category */
+.team__junior-dept {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.team__junior-dept h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+/* Right Side Grid */
+.team__junior-grid {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.team__junior-card {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Matches screenshot left alignment */
+  transition: transform 0.3s ease;
+}
+
+/* Square portraits for Junior board */
+.team__junior-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1/1; 
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.05); 
+  border: 1px solid var(--glass-border);
+}
+
+.team__junior-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%); /* Elegant grayscale like screenshot */
+  transition: all 0.5s ease;
+}
+
+/* On hover glow up and convert to color */
+.team__junior-card:hover .team__junior-img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.team__junior-info {
+  text-align: left;
+  width: 100%;
+}
+
+.team__junior-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.team__junior-role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .team__senior-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .team__junior-row {
+    gap: 40px;
+  }
+  
+  .team__junior-dept {
+    width: 200px;
+  }
+  
+  .team__junior-dept h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .team__senior-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  
+  .team__junior-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding-bottom: 40px;
+  }
+  
+  .team__junior-dept {
+    width: 100%;
+  }
+  
+  .team__junior-grid {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .team__junior-card {
+    width: 100%;
+    align-items: center;
+  }
+  
+  .team__junior-info {
+    text-align: center;
+  }
+}

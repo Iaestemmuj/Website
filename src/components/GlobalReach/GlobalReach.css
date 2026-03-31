@@ -1,0 +1,149 @@
+.global-reach {
+  padding: 40px 0 80px;
+  position: relative;
+  z-index: 10;
+}
+
+.reach__wrapper {
+  display: flex;
+  align-items: center;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Left Side: Globe Container */
+.reach__map-box {
+  flex: 1;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+}
+
+.reach__map-box > div {
+  /* This targets the react-globe.gl canvas wrapper to prevent overflow bugs */
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* The HTML Pin Element rendered on the globe */
+.reach__pin {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-cyan);
+  background: var(--bg-card);
+  box-shadow: 0 0 15px var(--accent-glow);
+  position: relative;
+  transform: translate(-50%, -50%); /* Centering trick for globe.gl elements */
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.reach__pin:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  z-index: 1000;
+}
+
+.reach__pin img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Right Side: Content & Stats */
+.reach__content {
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reach__title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.reach__desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 90%;
+}
+
+.reach__stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.reach__stat h3 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+  text-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
+}
+
+.reach__stat p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  max-width: 140px;
+  line-height: 1.4;
+}
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  .reach__wrapper {
+    flex-direction: column;
+  }
+  
+  .reach__map-box {
+    width: 100%;
+    height: 400px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  
+  .reach__content {
+    padding: 40px;
+  }
+  
+  .reach__title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .reach__map-box {
+    height: 300px;
+  }
+
+  .reach__content {
+    padding: 32px 24px;
+  }
+
+  .reach__stats {
+    gap: 24px;
+    flex-direction: column;
+  }
+
+  .reach__stat p {
+    max-width: none;
+  }
+}
