@@ -243,7 +243,9 @@
   color: var(--text-muted);
   line-height: 1.6;
   display: -webkit-box;
+  display: box; /* fallback */
   -webkit-line-clamp: 3;
+  line-clamp: 3; /* standard property */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-align: left;
