@@ -3,29 +3,26 @@ import { Link } from 'react-router-dom';
 import { FiImage } from 'react-icons/fi';
 import './EventGallery.css';
 
-// Recursively read all images and text files added to public/gallery
-const imageModules = import.meta.glob('/public/gallery/**/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+// Read only root-level images directly inside public/gallery
+const imageModules = import.meta.glob('/public/gallery/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const textModules = import.meta.glob('/public/gallery/**/*.txt', { as: 'raw', eager: true });
 
 const parsedImages = Object.keys(imageModules).map((filePath) => {
   const parts = filePath.split('/');
-  // If the path length is 4 (e.g., ['', 'public', 'gallery', 'image.jpg']), it's a cover photo.
-  // If the path length is 5 (e.g., ['', 'public', 'gallery', 'Event Name', 'image.jpg']), it's inside a gallery.
-  const isRoot = parts.length === 4;
+  // since we only load from root now (*.{jpg})
+  const isRoot = true;
   
   const rawFilename = parts.pop();
   const filenameBase = rawFilename.replace(/\.[^/.]+$/, '');
-  const folderName = isRoot ? null : parts[3];
   
   // Format title for display
-  const title = isRoot ? filenameBase.replace(/_/g, ' ').replace(/-/g, ': ') : null;
+  const title = filenameBase.replace(/_/g, ' ').replace(/-/g, ': ');
   
   return {
     src: filePath.replace('/public', ''),
     title: title,
-    filenameBase: isRoot ? filenameBase : null,
-    folderName: folderName,
-    isRoot: isRoot
+    filenameBase: filenameBase,
+    isRoot: true
   };
 });
 
@@ -38,18 +35,34 @@ const defaultImages = [
   { src: 'https://images.unsplash.com/photo-1523580494112-071d1694084c?w=1200&fit=crop', title: 'Engineering Workshop Symposium', filenameBase: 'Engineering_Workshop_Symposium', secondarySrc: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&fit=crop', description: 'Hands-on practical experience for aspiring innovators alongside expert guidance.' },
 ];
 
-// Only show root-level images here. Map them to find their secondary image and description text.
-const rootImages = parsedImages.filter(img => img.isRoot).map(rootImg => {
+// Map root images to find their description text and cloudinary link
+const rootImages = parsedImages.map(rootImg => {
   const eventName = rootImg.filenameBase;
-  const folderImage = parsedImages.find(img => !img.isRoot && img.folderName === eventName && img.src !== rootImg.src);
-  
   const txtPath = `/public/gallery/${eventName}/${eventName}.txt`;
-  const description = textModules[txtPath] || 'Join us to explore amazing opportunities, foster global connections, and create memories that will last a lifetime.';
+  const rawText = textModules[txtPath] || '';
+  
+  let description = 'Join us to explore amazing opportunities, foster global connections, and create memories that will last a lifetime.';
+  let cloudinaryLink = null;
+  
+  if (rawText) {
+    const lines = rawText.split('\n').map(l => l.trim()).filter(Boolean);
+    // Find the cloudinary link in text lines
+    const linkLineIndex = lines.findIndex(l => l.toUpperCase().startsWith('CLOUDINARY_LINK:'));
+    if (linkLineIndex !== -1) {
+      cloudinaryLink = lines[linkLineIndex].substring(16).trim();
+      // Description is everything else
+      const descLines = lines.filter((_, idx) => idx !== linkLineIndex);
+      if (descLines.length > 0) description = descLines.join(' ');
+    } else {
+      if (lines.length > 0) description = lines.join(' ');
+    }
+  }
   
   return {
     ...rootImg,
-    secondarySrc: folderImage ? folderImage.src : rootImg.src,
-    description: description
+    secondarySrc: rootImg.src, // Fallback to root image because we no longer recursively bundle nested images
+    description: description,
+    cloudinaryLink: cloudinaryLink
   };
 });
 
@@ -153,9 +166,15 @@ export default function EventGallery() {
                     </div>
                     <div className="gallery__card-right-content">
                       <p className="gallery__card-desc">{img.description}</p>
-                      <Link to={`/events/gallery/${encodeURIComponent(img.filenameBase)}`} className="gallery__card-link">
-                        Open Full Album <FiImage />
-                      </Link>
+                      {img.cloudinaryLink ? (
+                        <a href={img.cloudinaryLink} target="_blank" rel="noopener noreferrer" className="gallery__card-link">
+                          Open Full Album <FiImage />
+                        </a>
+                      ) : (
+                        <Link to={`/events/gallery/${encodeURIComponent(img.filenameBase)}`} className="gallery__card-link">
+                          Open Full Album <FiImage />
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
