@@ -26,7 +26,7 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [openIdx, setOpenIdx] = useState(0); // 1st one open by default
+  const [openIdx, setOpenIdx] = useState(null); // 1st one open by default
 
   const toggleAccordion = (index) => {
     setOpenIdx(openIdx === index ? 0 : index);

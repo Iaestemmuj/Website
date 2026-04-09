@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { FiImage } from 'react-icons/fi';
 import './EventGallery.css';
 
-// Recursively read all images added to public/gallery at build time.
+// Recursively read all images and text files added to public/gallery
 const imageModules = import.meta.glob('/public/gallery/**/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const textModules = import.meta.glob('/public/gallery/**/*.txt', { as: 'raw', eager: true });
 
 const parsedImages = Object.keys(imageModules).map((filePath) => {
   const parts = filePath.split('/');
@@ -14,31 +15,44 @@ const parsedImages = Object.keys(imageModules).map((filePath) => {
   
   const rawFilename = parts.pop();
   const filenameBase = rawFilename.replace(/\.[^/.]+$/, '');
+  const folderName = isRoot ? null : parts[3];
   
   // Format title for display
-  const title = filenameBase.replace(/_/g, ' ').replace(/-/g, ': ');
+  const title = isRoot ? filenameBase.replace(/_/g, ' ').replace(/-/g, ': ') : null;
   
   return {
     src: filePath.replace('/public', ''),
     title: title,
-    filenameBase: filenameBase, // Use this for the sub-folder matching route
+    filenameBase: isRoot ? filenameBase : null,
+    folderName: folderName,
     isRoot: isRoot
   };
 });
 
 // We provide default stunning placeholders if the folder is empty
 const defaultImages = [
-  { src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&fit=crop', title: 'Namaste Manipal: Welcome Interns 2026', filenameBase: 'Namaste_Manipal-_Welcome_Interns_2026' },
-  { src: 'https://images.unsplash.com/photo-1505373877138-d4b4ec9e0e6e?w=1200&fit=crop', title: 'Annual Conference: Global Networking', filenameBase: 'Annual_Conference-_Global_Networking' },
-  { src: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&fit=crop', title: 'Tech Talk Series', filenameBase: 'Tech_Talk_Series' },
-  { src: 'https://images.unsplash.com/photo-1511632765486-a01c80cf8cb4?w=1200&fit=crop', title: 'Cultural Reception Gala 2025', filenameBase: 'Cultural_Reception_Gala_2025' },
-  { src: 'https://images.unsplash.com/photo-1523580494112-071d1694084c?w=1200&fit=crop', title: 'Engineering Workshop Symposium', filenameBase: 'Engineering_Workshop_Symposium' },
-  { src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&fit=crop', title: 'International Team Building Session', filenameBase: 'International_Team_Building_Session' },
-  { src: 'https://images.unsplash.com/photo-1558403194-611308249627?w=1200&fit=crop', title: 'Exchange Program Orientation', filenameBase: 'Exchange_Program_Orientation' },
+  { src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&fit=crop', title: 'Namaste Manipal: Welcome Interns 2026', filenameBase: 'Namaste_Manipal-_Welcome_Interns_2026', secondarySrc: 'https://images.unsplash.com/photo-1511632765486-a01c80cf8cb4?w=1200&fit=crop', description: 'A grand welcome for all our international interns. Join us to experience the vibrant culture of India.' },
+  { src: 'https://images.unsplash.com/photo-1505373877138-d4b4ec9e0e6e?w=1200&fit=crop', title: 'Annual Conference: Global Networking', filenameBase: 'Annual_Conference-_Global_Networking', secondarySrc: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&fit=crop', description: 'Connect with industry stalwarts and build meaningful global connections at our signature annual conference.' },
+  { src: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&fit=crop', title: 'Tech Talk Series', filenameBase: 'Tech_Talk_Series', secondarySrc: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&fit=crop', description: 'Diving deep into emerging technologies. Informative sessions hosted by professionals pushing the boundaries.' },
+  { src: 'https://images.unsplash.com/photo-1511632765486-a01c80cf8cb4?w=1200&fit=crop', title: 'Cultural Reception Gala 2025', filenameBase: 'Cultural_Reception_Gala_2025', secondarySrc: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&fit=crop', description: 'A night of performances, music, and exquisite global cuisines showcasing unity in diversity.' },
+  { src: 'https://images.unsplash.com/photo-1523580494112-071d1694084c?w=1200&fit=crop', title: 'Engineering Workshop Symposium', filenameBase: 'Engineering_Workshop_Symposium', secondarySrc: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&fit=crop', description: 'Hands-on practical experience for aspiring innovators alongside expert guidance.' },
 ];
 
-// Only show root-level images here. The subfolder images belong to the specific event gallery.
-const rootImages = parsedImages.filter(img => img.isRoot);
+// Only show root-level images here. Map them to find their secondary image and description text.
+const rootImages = parsedImages.filter(img => img.isRoot).map(rootImg => {
+  const eventName = rootImg.filenameBase;
+  const folderImage = parsedImages.find(img => !img.isRoot && img.folderName === eventName && img.src !== rootImg.src);
+  
+  const txtPath = `/public/gallery/${eventName}/${eventName}.txt`;
+  const description = textModules[txtPath] || 'Join us to explore amazing opportunities, foster global connections, and create memories that will last a lifetime.';
+  
+  return {
+    ...rootImg,
+    secondarySrc: folderImage ? folderImage.src : rootImg.src,
+    description: description
+  };
+});
+
 const galleryImages = rootImages.length > 0 ? rootImages : defaultImages;
 
 export default function EventGallery() {
@@ -121,17 +135,30 @@ export default function EventGallery() {
             <h2 className="section-title text-center">Fostering Global <br/> Connections & Experiences</h2>
             <p className="section-subtitle text-center">From cultural receptions to technical conferences, we create memories that last a lifetime.</p>
             
-            <div className="gallery__bento">
+            <div className="gallery__horizontal-list">
               {gridImages.map((img, idx) => (
-                <Link to={`/events/gallery/${encodeURIComponent(img.filenameBase)}`} key={idx} className="gallery__item">
-                  <img src={img.src} alt={img.title} loading="lazy" />
-                  <div className="gallery__item-overlay">
-                    <h3 className="gallery__item-title">{img.title}</h3>
-                    <div className="gallery__item-link">
-                      Open Gallery Album <FiImage />
+                <div key={idx} className="gallery__horizontal-card">
+                  {/* Left Side: Original Cover Photo */}
+                  <div className="gallery__card-left">
+                    <img src={img.src} alt={img.title} loading="lazy" />
+                    <div className="gallery__card-left-overlay">
+                      <h3>{img.title}</h3>
                     </div>
                   </div>
-                </Link>
+                  
+                  {/* Right Side: Small wide photo + text block */}
+                  <div className="gallery__card-right">
+                    <div className="gallery__card-right-img">
+                      <img src={img.secondarySrc} alt={`${img.title} secondary`} loading="lazy" />
+                    </div>
+                    <div className="gallery__card-right-content">
+                      <p className="gallery__card-desc">{img.description}</p>
+                      <Link to={`/events/gallery/${encodeURIComponent(img.filenameBase)}`} className="gallery__card-link">
+                        Open Full Album <FiImage />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>

@@ -5,27 +5,27 @@ import './Team.css';
 // The user will replace these image links with Google Drive direct links later.
 const seniorBoard = [
   {
-    name: 'John Doe',
+    name: 'KRIISH MARWAHA',
     role: 'President',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&fit=crop',
-    linkedin: '#',
-    email: 'mailto:president@iaestemuj.org',
-    phone: '+91 98765 43210'
+    image: 'https://res.cloudinary.com/da1gabqgt/image/upload/v1775743710/Kriissh_Marwaha_sjuxfo.jpg',
+    linkedin: 'https://www.linkedin.com/in/kriisshmarwaha/',
+    email: 'president@iaestemuj.in',
+    phone: '+91 7453083224'
   },
   {
-    name: 'Jane Smith',
-    role: 'SRO',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&fit=crop',
-    linkedin: '#',
-    email: 'mailto:sro@iaestemuj.org',
+    name: 'ARYAN KAPOOR',
+    role: 'Exchange Advisor',
+    image: 'https://res.cloudinary.com/da1gabqgt/image/upload/v1775744432/Aryan_kapoor_wbscx6.jpg',
+    linkedin: 'https://www.linkedin.com/in/aryan-kapoor-67098b261/',
+    email: '',
     phone: '+91 98765 43211'
   },
   {
-    name: 'Robert Fox',
-    role: 'BDIR',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&fit=crop',
-    linkedin: '#',
-    email: 'mailto:bdir@iaestemuj.org',
+    name: 'BHAVYA CHAUHAN',
+    role: 'BUSINESS DEVELOPMENT AND INTERNAL RELATION MANAGER',
+    image: 'https://res.cloudinary.com/da1gabqgt/image/upload/v1775743702/Bhavya_Chauhan_v29mq6.jpg',
+    linkedin: 'https://www.linkedin.com/in/bhavya-chauhan-b8997b286/',
+    email: 'bdir@iaestemuj.in',
     phone: '+91 98765 43212'
   }
 ];
@@ -35,22 +35,64 @@ const juniorBoard = [
   {
     department: 'Administration',
     heads: [
-      { name: 'Sarah Bennett', role: 'Head', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&fit=crop' },
-      { name: 'David Cooper', role: 'Head', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&fit=crop' }
-    ]
-  },
-  {
-    department: 'Outgoing Exchange',
-    heads: [
-      { name: 'Michael Reed', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' },
-      { name: 'Emily Foster', role: 'Head', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&fit=crop' },
-      { name: 'James Wilson', role: 'Head', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&fit=crop' }
+      { name: 'JAYESH DHOOT', role: 'Head', image: 'https://res.cloudinary.com/da1gabqgt/image/upload/q_auto/f_auto/v1775743678/Jayesh_Dhoot_frxmr5.jpg' },
+      { name: 'ADITI KESHRI', role: 'Head', image: 'https://res.cloudinary.com/da1gabqgt/image/upload/q_auto/f_auto/v1775743717/Aditi_Keshri_vvx6lo.jpg' }
     ]
   },
   {
     department: 'Incoming Exchange',
     heads: [
-      { name: 'Anna Lee', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
+      { name: 'KANCHAN KANDARI', role: 'Head', image: 'https://res.cloudinary.com/da1gabqgt/image/upload/q_auto/f_auto/v1775743672/Kanchan_Kandari_skcrce.jpg' },
+      { name: 'SHISHIR MODI', role: 'Head', image: 'https://res.cloudinary.com/da1gabqgt/image/upload/q_auto/f_auto/v1775743685/Shishir_Modi_ip3rb6.jpg' },
+      { name: 'SHARANYA', role: 'Head', image: 'https://res.cloudinary.com/da1gabqgt/image/upload/q_auto/f_auto/v1775745138/Sharanya_t2dswi.jpg' }
+    ]
+  },
+  {
+    department: 'Outcoming Exchange',
+    heads: [
+      { name: '', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
+      { name: 'Chris Chen', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' }
+    ]
+  },
+  {
+    department: 'Consular & Member Affairs',
+    heads: [
+      { name: '', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
+      { name: 'Chris Chen', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' }
+    ]
+  },
+  {
+    department: 'Finance',
+    heads: [
+      { name: '', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
+      { name: 'Chris Chen', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' }
+    ]
+  },
+  {
+    department: 'Human Resourses',
+    heads: [
+      { name: '', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
+      { name: 'Chris Chen', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' }
+    ]
+  },
+  {
+    department: 'corporate & Alumni Relations',
+    heads: [
+      { name: '', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
+      { name: 'Chris Chen', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' }
+    ]
+  },
+  {
+    department: 'Promotions & Design',
+    heads: [
+      { name: '', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
+      { name: 'Chris Chen', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' }
+    ]
+  },
+  {
+    department: 'Information Technology & Data Analytic',
+    heads: [
+      { name: '', role: 'Head', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&fit=crop' },
       { name: 'Chris Chen', role: 'Head', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&fit=crop' }
     ]
   }

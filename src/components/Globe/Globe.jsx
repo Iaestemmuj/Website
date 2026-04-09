@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import ReactGlobe from 'react-globe.gl';
+import jaipurBg from '../../assets/image.png';
 
 export default function Globe() {
   const globeRef = useRef();
@@ -16,7 +17,7 @@ export default function Globe() {
         height: window.innerHeight,
       });
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -26,9 +27,9 @@ export default function Globe() {
       // Configure controls
       const controls = globeRef.current.controls();
       controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.7;
+      controls.autoRotateSpeed = 0.5;
       controls.enableZoom = true;
-      
+
       // Set initial POV
       globeRef.current.pointOfView({ altitude: 2 });
     }
@@ -44,7 +45,7 @@ export default function Globe() {
         height: '100vh',
         zIndex: 0,
         // Optional: reduce opacity slightly to make text more readable
-        opacity: 0.9, 
+        opacity: 0.9,
         pointerEvents: 'auto'
       }}
       id="globe-container"
@@ -55,7 +56,7 @@ export default function Globe() {
         height={dimensions.height}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-        backgroundImageUrl="https://cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png"
+        
         atmosphereColor="#00B4D8"
         atmosphereAltitude={0.2}
         // Markers - empty for now, can be added later
