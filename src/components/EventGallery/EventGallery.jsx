@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { FiImage } from 'react-icons/fi';
 import './EventGallery.css';
 
-// Read only root-level images directly inside public/gallery
-const imageModules = import.meta.glob('/public/gallery/*.{jpg,jpeg,png,webp,avif}', { eager: true });
-const textModules = import.meta.glob('/public/gallery/**/*.txt', { as: 'raw', eager: true });
+// Read only root-level images directly inside src/assets/gallery
+const imageModules = import.meta.glob('../../assets/gallery/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const textModules = import.meta.glob('../../assets/gallery/**/*.txt', { as: 'raw', eager: true });
 
 const parsedImages = Object.keys(imageModules).map((filePath) => {
   const parts = filePath.split('/');
@@ -19,7 +19,7 @@ const parsedImages = Object.keys(imageModules).map((filePath) => {
   const title = filenameBase.replace(/_/g, ' ').replace(/-/g, ': ');
   
   return {
-    src: filePath.replace('/public', ''),
+    src: imageModules[filePath].default || imageModules[filePath], // Asset URL
     title: title,
     filenameBase: filenameBase,
     isRoot: true
@@ -38,7 +38,7 @@ const defaultImages = [
 // Map root images to find their description text and cloudinary link
 const rootImages = parsedImages.map(rootImg => {
   const eventName = rootImg.filenameBase;
-  const txtPath = `/public/gallery/${eventName}/${eventName}.txt`;
+  const txtPath = `../../assets/gallery/${eventName}/${eventName}.txt`;
   const rawText = textModules[txtPath] || '';
   
   let description = 'Join us to explore amazing opportunities, foster global connections, and create memories that will last a lifetime.';

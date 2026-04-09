@@ -3,7 +3,7 @@ import { FiArrowLeft, FiExternalLink } from 'react-icons/fi';
 import './Page.css';
 
 // Only load txt files to fetch Cloudinary link fallback
-const textModules = import.meta.glob('/public/gallery/**/*.txt', { as: 'raw', eager: true });
+const textModules = import.meta.glob('../assets/gallery/**/*.txt', { as: 'raw', eager: true });
 
 export default function GalleryPage() {
   const { eventName } = useParams();
@@ -13,7 +13,7 @@ export default function GalleryPage() {
     ? decodeURIComponent(eventName).replace(/_/g, ' ').replace(/-/g, ': ')
     : 'Event Gallery';
 
-  const txtPath = `/public/gallery/${eventName}/${eventName}.txt`;
+  const txtPath = `../assets/gallery/${eventName}/${eventName}.txt`;
   const rawText = textModules[txtPath] || '';
   let cloudinaryLink = null;
   
@@ -60,7 +60,7 @@ export default function GalleryPage() {
                <p style={{ color: 'var(--accent-color)' }}>
                 No external album link configured for this event yet.
                 <br />
-                <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}> (Add CLOUDINARY_LINK: https://... in public/gallery/{eventName}/{eventName}.txt)</span>
+                <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}> (Add CLOUDINARY_LINK: https://... in src/assets/gallery/{eventName}/{eventName}.txt)</span>
                </p>
             )}
           </div>
