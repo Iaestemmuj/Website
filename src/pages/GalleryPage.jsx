@@ -3,7 +3,7 @@ import { FiArrowLeft, FiExternalLink } from 'react-icons/fi';
 import './Page.css';
 
 // Only load txt files to fetch Cloudinary link fallback
-const textModules = import.meta.glob('../assets/gallery/**/*.txt', { as: 'raw', eager: true });
+const textModules = import.meta.glob('../assets/gallery/**/*.txt', { query: '?raw', import: 'default', eager: true });
 
 export default function GalleryPage() {
   const { eventName } = useParams();

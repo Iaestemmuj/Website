@@ -5,7 +5,7 @@ import './EventGallery.css';
 
 // Read only root-level images directly inside src/assets/gallery
 const imageModules = import.meta.glob('../../assets/gallery/*.{jpg,jpeg,png,webp,avif}', { eager: true });
-const textModules = import.meta.glob('../../assets/gallery/**/*.txt', { as: 'raw', eager: true });
+const textModules = import.meta.glob('../../assets/gallery/**/*.txt', { query: '?raw', import: 'default', eager: true });
 
 const parsedImages = Object.keys(imageModules).map((filePath) => {
   const parts = filePath.split('/');
