@@ -33,7 +33,7 @@ export default function About() {
               programs that broaden horizons and build global careers.
             </p>
             <p className="about__cta-text">
-              Let's start your journey here! <span className="accent-text">→</span>
+              <a href='https://iaeste-ff273.firebaseapp.com/' target="_blank">Let's start your journey here! <span className="accent-text">→</span></a>
             </p>
           </div>
 

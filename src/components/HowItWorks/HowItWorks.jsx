@@ -146,7 +146,7 @@ export default function HowItWorks() {
                   Next Step <FiArrowRight />
                 </button>
               ) : (
-                <a href="#register" className="btn-primary hiw__nav-btn hiw__nav-cta">
+                <a href=" https://forms.gle/LLBxq2zyANUpxDWj6" className="btn-primary hiw__nav-btn hiw__nav-cta">
                   Get Started <FiCheck />
                 </a>
               )}

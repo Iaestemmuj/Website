@@ -34,10 +34,10 @@ export default function Footer() {
               International Association for the Exchange of Students for Technical Experience
             </p>
             <div className="footer__socials">
-              <a href="#" className="footer__social-link" aria-label="Instagram"><FiInstagram /></a>
-              <a href="#" className="footer__social-link" aria-label="Email"><FiMail /></a>
-              <a href="#" className="footer__social-link" aria-label="Facebook"><FiFacebook /></a>
-              <a href="#" className="footer__social-link" aria-label="LinkedIn"><FiLinkedin /></a>
+              <a href="https://www.instagram.com/iaeste.muj/" className="footer__social-link" aria-label="Instagram"><FiInstagram /></a>
+              <a href="" className="footer__social-link" aria-label="Email"><FiMail /></a>
+              <a href="https://www.facebook.com/iaestemuj/" className="footer__social-link" aria-label="Facebook"><FiFacebook /></a>
+              <a href="https://www.linkedin.com/company/iaestemuj/" className="footer__social-link" aria-label="LinkedIn"><FiLinkedin /></a>
             </div>
           </div>
 
@@ -61,10 +61,7 @@ export default function Footer() {
           <p className="footer__copyright">
             Copyright© 2026, IAESTE LC MUJ. All Rights Reserved.
           </p>
-          <div className="footer__bottom-links">
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
-          </div>
+          
         </div>
       </div>
 

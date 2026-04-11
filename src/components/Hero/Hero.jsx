@@ -26,7 +26,7 @@ export default function Hero() {
           </p>
 
           <div className="hero__actions animate-fade-in-up" style={{ animationDelay: '0.45s' }}>
-            <a href="https://iaeste-ff273.firebaseapp.com/" className="btn-primary">
+            <a href=" https://forms.gle/LLBxq2zyANUpxDWj6" target="_blank" className="btn-primary">
               Join us   
               <FiArrowRight />
             </a>
