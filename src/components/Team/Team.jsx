@@ -7,7 +7,7 @@ const seniorBoard = [
   {
     name: 'KRIISH MARWAHA',
     role: 'President',
-    image: 'https://res.cloudinary.com/da1gabqgt/image/upload/v1775743710/Kriissh_Marwaha_sjuxfo.jpg',
+    image: 'https://res.cloudinary.com/dmlavf10t/image/upload/v1775925883/KRIISSH_MARWAHA_ww4pvg.jpg',
     linkedin: 'https://www.linkedin.com/in/kriisshmarwaha/',
     email: 'president@iaestemuj.in',
     phone: '+91 7453083224'

@@ -11,11 +11,6 @@ export default function EventsPage() {
           Join our worldwide network of students and professionals. Discover upcoming conferences,
           career fairs, and cultural exchanges tailored for technical experience.
         </p>
-      </div>
-      
-      {/* Reusing the Events component but without its native container paddings 
-          if it had heavy top padding. The component handles its own layout. */}
-      <div>
         <Events />
         <EventGallery />
       </div>
